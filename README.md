@@ -85,21 +85,6 @@ Example: 13 out of 20 with a 75% target gives `(0.75*20 - 13) / 0.25 = 8`. After
 
 I added a tiny `1e-9` in these two formulas because floating point sometimes gave results like 2.9999999 and the floor made it 2 instead of 3.
 
-## Concepts used
-
-- Structs and `typedef` (`Subject`, `Tracker`)
-- `enum` for the attendance status
-- Dynamic memory: the subject list is `malloc`ed and grows with `realloc` when it gets full, `free` at the end
-- Pointers: functions take `Subject *` and `Tracker *`, plus some pointer arithmetic in the name comparison
-- File handling: `fopen`, `fprintf`, `fgets`, `sscanf`
-- Command line arguments (`argc` / `argv`)
-- Functions split across multiple `.c` and `.h` files with header guards
-- `#define` constants
-- Strings and string functions (`strncpy`, `strchr`, `strcmp`, `strlen`)
-- Type casting (`(double)attended / total`) so it doesn't do integer division
-- Math functions `floor` and `ceil` from `math.h`
-- `switch`, `do while`, `for` and `while` loops
-- `goto` for cleanup: in `load_data` and `main`, any error jumps to one place that closes the file or frees memory. I read that this is one place where goto is actually fine in C.
 
 ## Things I learned while making it
 
@@ -109,9 +94,3 @@ I added a tiny `1e-9` in these two formulas because floating point sometimes gav
 - If the save file is corrupted the program stops instead of overwriting it, so the data is not lost
 - Compiled with `-Wall -Wextra` with no warnings, and checked with AddressSanitizer for memory errors
 
-## Things I want to add later
-
-- Store the date of every class instead of only the totals
-- A weekly timetable so it knows which subjects have class today
-- Sorting the report by lowest attendance first
-- Moving from the text file to a binary file
